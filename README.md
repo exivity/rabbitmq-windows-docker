@@ -1,4 +1,5 @@
-# RabbitMQ
+# RabbitMQ 
+Based on the following repo: https://github.com/spring2/dockerfiles/tree/master/rabbitmq
 
 RabbitMQ running in windows container with:
 - Basic install with default guest enabled
