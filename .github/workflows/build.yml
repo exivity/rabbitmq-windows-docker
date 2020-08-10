@@ -21,7 +21,7 @@ jobs:
       - name: test
         run: ./test.sh
       - name: login
-        run: echo $GITHUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
+        run: echo $DOCKER_HUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
         env:
           DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
