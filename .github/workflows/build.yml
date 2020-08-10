@@ -13,9 +13,10 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v1
+      - uses: satackey/action-docker-layer-caching@v0.0.5
       - name: build
         run: |
-          docker build --build-arg VERSION=$RABBITMQ_VERSION -f Dockerfile.windows -t exivity/rabbitmq:$RABBITMQ_VERSION .
+          docker build --build-arg VERSION=$RABBITMQ_VERSION --file Dockerfile.windows --tag exivity/rabbitmq:$RABBITMQ_VERSION .
           docker tag exivity/rabbitmq:latest exivity/rabbitmq:$RABBITMQ_VERSION
       - name: login
         run: echo $GITHUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
