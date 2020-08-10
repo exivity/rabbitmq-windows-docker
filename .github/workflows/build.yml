@@ -2,17 +2,18 @@ name: Build CI
 
 on: [push]
 
+env:
+  RABBITMQ_VERSION: 3.8.6
+
 jobs:
   build:
     runs-on: windows-2019
-    env:
-      VERSION: 3.8.6
     steps:
       - uses: actions/checkout@v1
       - name: build
         run: |
-          docker build --build-arg VERSION=$VERSION -f Dockerfile.windows -t exivity/rabbitmq:$VERSION .
-          docker tag exivity/rabbitmq:latest exivity/rabbitmq:$VERSION
+          docker build --build-arg VERSION=$RABBITMQ_VERSION -f Dockerfile.windows -t exivity/rabbitmq:$RABBITMQ_VERSION .
+          docker tag exivity/rabbitmq:latest exivity/rabbitmq:$RABBITMQ_VERSION
       - name: login
         run: echo $GITHUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
         env:
@@ -20,5 +21,5 @@ jobs:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: push
         run: |
-          docker push exivity/rabbitmq:$VERSION
+          docker push exivity/rabbitmq:$RABBITMQ_VERSION
           docker push exivity/rabbitmq:latest
