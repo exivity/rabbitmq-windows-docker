@@ -16,14 +16,15 @@ RUN curl ('https://github.com/rabbitmq/rabbitmq-server/releases/download/v{0}/ra
 ENV RABBITMQ_SERVER="C:\Program Files\RabbitMQ Server\rabbitmq_server-${VERSION}"
 
 ENV RABBITMQ_CONFIG_FILE="c:\rabbitmq"
-COPY rabbitmq.config C:/
-COPY rabbitmq.config C:/Users/ContainerAdministrator/AppData/Roaming/RabbitMQ/
+COPY healthcheck.cmd C:/
 COPY enabled_plugins C:/Users/ContainerAdministrator/AppData/Roaming/RabbitMQ/
 
 EXPOSE 4369
-EXPOSE 5672
 EXPOSE 5671
+EXPOSE 5672
 EXPOSE 15672
+
+HEALTHCHECK --interval=5s --timeout=60s CMD C:/healthcheck.cmd
 
 WORKDIR C:/Program\ Files/RabbitMQ\ Server/rabbitmq_server-${VERSION}/sbin
 CMD .\rabbitmq-server.bat

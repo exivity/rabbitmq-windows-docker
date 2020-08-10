@@ -18,6 +18,8 @@ jobs:
         run: |
           docker build --build-arg VERSION=$RABBITMQ_VERSION --file Dockerfile.windows --tag exivity/rabbitmq:$RABBITMQ_VERSION .
           docker tag exivity/rabbitmq:$RABBITMQ_VERSION exivity/rabbitmq:latest
+      - name: test
+        run: test.sh
       - name: login
         run: echo $GITHUB_TOKEN | docker login -u $DOCKER_HUB_USER --password-stdin
         env:
