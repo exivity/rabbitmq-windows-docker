@@ -31,3 +31,11 @@ Attach shell to running container:
 ```
 docker exec -it rabbitmq cmd.exe
 ```
+
+Then, i.e. follow log file:
+
+```
+powershell
+Get-Content C:\Users\
+ContainerAdministrator\AppData\Roaming\RabbitMQ\log\rabbit@HOSTNAME.log Wait
+```
